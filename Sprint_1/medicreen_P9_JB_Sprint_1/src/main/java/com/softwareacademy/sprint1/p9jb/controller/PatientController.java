@@ -9,12 +9,7 @@ import com.softwareacademy.sprint1.p9jb.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -33,9 +28,15 @@ public class PatientController {
         return findAll;
     }
 
-    @GetMapping("/patient")
+    /*@GetMapping("/patient")
     public Patient getPatientByFirstNameAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws DoesNotExistsException {
         Patient patient = patientService.getPatient(firstName, lastName);
+        return patient;
+    }*/
+
+    @GetMapping("/patient/{id}")
+    public Patient getPatientById(@PathVariable("id") long id) throws DoesNotExistsException {
+        Patient patient = patientService.getPatientById(id);
         return patient;
     }
 
@@ -51,8 +52,9 @@ public class PatientController {
     }
 
     @PutMapping("/patient")
-    public Patient updatePatient(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, @RequestBody Patient patientUpdated) throws DoesNotExistsException {
-        Patient patientToUpdate = patientService.getPatient(firstName, lastName);
+    public Patient updatePatient(@RequestParam("id") long id, @RequestBody Patient patientUpdated) throws DoesNotExistsException {
+        //Patient patientToUpdate = patientService.getPatient(firstName, lastName);
+        Patient patientToUpdate = patientService.getPatientById(id);
         return patientService.updatePatient(patientToUpdate, patientUpdated);
     }
 

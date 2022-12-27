@@ -47,9 +47,8 @@ public class Patient {
     @Past
     @NotNull
     @Column(name = "birth_date")
-    @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @NotBlank
     @Pattern(regexp = "M|F")
@@ -63,7 +62,5 @@ public class Patient {
     @Length(max = 100, message = "Maximum 100 characters")
     @Column(name = "address")
     private String address;
-
-
 
 }

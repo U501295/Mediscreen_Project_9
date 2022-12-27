@@ -28,11 +28,11 @@ public class PatientController {
         return findAll;
     }
 
-    /*@GetMapping("/patient")
+    @GetMapping("/patient")
     public Patient getPatientByFirstNameAndLastName(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws DoesNotExistsException {
         Patient patient = patientService.getPatient(firstName, lastName);
         return patient;
-    }*/
+    }
 
     @GetMapping("/patient/{id}")
     public Patient getPatientById(@PathVariable("id") long id) throws DoesNotExistsException {

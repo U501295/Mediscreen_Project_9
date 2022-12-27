@@ -31,6 +31,14 @@ public class PatientService {
         return optionalPatient.get();
     }
 
+    public Patient getPatientById(long id) throws DoesNotExistsException {
+        Optional<Patient> optionalPatient = patientRepository.findById(id);
+        if( ! optionalPatient.isPresent()) {
+            throw new DoesNotExistsException("Patient with id " + id + " does not exists");
+        }
+        return optionalPatient.get();
+    }
+
     public List<Patient> getAllPatients() {
         List<Patient> allPatients = patientRepository.findAll();
         return allPatients;
